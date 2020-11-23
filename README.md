@@ -1,2 +1,2 @@
 AwesomeWM config
-to user with de like gnome or xfce
+to use with de like gnome or xfce
