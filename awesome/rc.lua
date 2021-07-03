@@ -8,10 +8,13 @@
 
 
 pcall(require, "luarocks.loader")
+------
 
 
 
 
+
+-----
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -37,6 +40,7 @@ if awesome.startup_errors then
                      text = awesome.startup_errors })
 end
 
+
 -- Handle runtime errors after startup
 do
     local in_error = false
@@ -58,8 +62,8 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "kitty"
-editor = os.getenv("nvim") or "notpadqq"
+terminal = "xfce4-terminal"
+editor = os.getenv("vim") or "notpadqq"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -102,8 +106,8 @@ awful.layout.layouts = {
 
 --mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
 --                                    { "open terminal", terminal }
- --                                 }
-  --                      })
+--                                 }
+--                      })
 
 
 -- Menubar configuration
@@ -192,8 +196,8 @@ globalkeys = gears.table.join(
 
     -- Standard program
 --app shortcuts
-	awful.key({modkey,    }, "b", function ()
-    awful.util.spawn("firefox") end),
+	awful.key({modkey,    }, "space", function ()
+    awful.util.spawn("xfce4-popup-whiskermenu") end),
 --		 {description = "open a brave", group = "launcher"}),
 	
 	awful.key({modkey,    }, "f", function ()
@@ -272,7 +276,7 @@ clientkeys = gears.table.join(
     awful.key({ modkey,   }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
-              {description = "toggle floating", group = "client"}),
+            {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
@@ -407,7 +411,7 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "mpv",
-	  "vlc",
+	  "Wrapper-2.0",
           "veromix",
           "xtightvncviewer"},
 
@@ -424,11 +428,11 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
  
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+
+     { rule = { class = "Xfce4-panel" },
+       properties = { border_width = 0 } },
 }
--- }}}
+--}}}
 
 
 
@@ -448,9 +452,10 @@ end
 
 --autostart
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("/home/hamed/.config/polybar/launch.sh")
 awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("mpd")
+
 
 beautiful.useless_gap = 4
+
+
 
